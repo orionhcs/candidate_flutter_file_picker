@@ -41,6 +41,9 @@ public class FileUtils {
     private static final String TAG = "FilePickerUtils";
     private static final String PRIMARY_VOLUME_NAME = "primary";
 
+    private static final String BMP_EXTENSION = "bmp";
+    private static final String BMP_MIME_TYPE = "image/bmp";
+
     public static String[] getMimeTypes(final ArrayList<String> allowedExtensions) {
 
         if (allowedExtensions == null || allowedExtensions.isEmpty()) {
@@ -51,6 +54,10 @@ public class FileUtils {
 
         for (int i = 0; i < allowedExtensions.size(); i++) {
             final String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(allowedExtensions.get(i));
+            // Add the sandard mime type for bmp files
+            if (allowedExtensions.get(i).equals(BMP_EXTENSION)) {
+                mimes.add(BMP_MIME_TYPE);
+            }
             if (mime == null) {
                 Log.w(TAG, "Custom file type " + allowedExtensions.get(i) + " is unsupported and will be ignored.");
                 continue;
